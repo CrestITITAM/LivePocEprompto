@@ -76,108 +76,108 @@ let quickUtilWindow;
 
 app.on('ready',function(){
 
-    // const gotTheLock = app.requestSingleInstanceLock();
-    // if (!gotTheLock) {
-    //   app.quit();
-    // }
+    const gotTheLock = app.requestSingleInstanceLock();
+    if (!gotTheLock) {
+      app.quit();
+    }
     
-    // tray = new Tray(iconPath);
+    tray = new Tray(iconPath);
 
-    // log.transports.file.level = 'info';
-    // log.transports.file.maxSize = 5 * 1024 * 1024;
-    // log.transports.file.file = reqPath + '/log.log';
-    // log.transports.file.streamConfig = { flags: 'a' };
-    // log.transports.file.stream = fs.createWriteStream(log.transports.file.file, log.transports.file.streamConfig);
-    // log.transports.console.level = 'debug';
+    log.transports.file.level = 'info';
+    log.transports.file.maxSize = 5 * 1024 * 1024;
+    log.transports.file.file = reqPath + '/log.log';
+    log.transports.file.streamConfig = { flags: 'a' };
+    log.transports.file.stream = fs.createWriteStream(log.transports.file.file, log.transports.file.streamConfig);
+    log.transports.console.level = 'debug';
     
-    //     session.defaultSession.cookies.get({ url: 'http://www.eprompto.com' })
-    //     .then((cookies) => {
-    //       console.log(cookies);
-    //       if(cookies.length == 0){
-    //         if(fs.existsSync(detail)){
-    //           fs.readFile(detail, 'utf8', function (err,data) {
-    //           if (err) {
-    //             return console.log(err);
-    //           }
+        session.defaultSession.cookies.get({ url: 'http://www.eprompto.com' })
+        .then((cookies) => {
+          console.log(cookies);
+          if(cookies.length == 0){
+            if(fs.existsSync(detail)){
+              fs.readFile(detail, 'utf8', function (err,data) {
+              if (err) {
+                return console.log(err);
+              }
               
-    //            var stats = fs.statSync(detail);
-    //            var fileSizeInBytes = stats["size"];
-    //            if(fileSizeInBytes > 0){
-    //                const cookie = {url: 'http://www.eprompto.com', name: data, value: '', expirationDate: 99999999999}
-    //              session.defaultSession.cookies.set(cookie, (error) => {
-    //               if (error) console.error(error)
-    //              })
-    //            }
-    //         });
-    //         }
-    //       }else{
-    //         if(fs.existsSync(detail)) {
-    //            var stats = fs.statSync(detail);
-    //          var fileSizeInBytes = stats["size"];
-    //          if(fileSizeInBytes == 0){
-    //               fs.writeFile(detail, cookies[0].name, function (err) { 
-    //             if (err) return console.log(err);                
-    //           });
-    //          }
-    //         } else {
-    //             fs.writeFile(detail, cookies[0].name, function (err) { 
-    //           if (err) return console.log(err);
-    //         });
-    //         }
+               var stats = fs.statSync(detail);
+               var fileSizeInBytes = stats["size"];
+               if(fileSizeInBytes > 0){
+                   const cookie = {url: 'http://www.eprompto.com', name: data, value: '', expirationDate: 99999999999}
+                 session.defaultSession.cookies.set(cookie, (error) => {
+                  if (error) console.error(error)
+                 })
+               }
+            });
+            }
+          }else{
+            if(fs.existsSync(detail)) {
+               var stats = fs.statSync(detail);
+             var fileSizeInBytes = stats["size"];
+             if(fileSizeInBytes == 0){
+                  fs.writeFile(detail, cookies[0].name, function (err) { 
+                if (err) return console.log(err);                
+              });
+             }
+            } else {
+                fs.writeFile(detail, cookies[0].name, function (err) { 
+              if (err) return console.log(err);
+            });
+            }
              
-    //       }
+          }
 
-    //       fs.access("C:/ITAMEssential", function(error) {
-    //         if (error) {
-    //           fs.mkdir("C:/ITAMEssential", function(err) {
-    //             if (err) {
-    //               console.log(err)
-    //             } else {                  
-    //                console.log("Created folder C:/ITAMEssential");
-    //                fs.mkdir("C:/ITAMEssential/EventLogCSV", function(err) {
-    //                 if (err) {
-    //                   console.log(err)
-    //                 } else {
-    //                   console.log("Created folder C:/ITAMEssential/EventLogCSV");               
-    //                   checkforbatchfile_FirstTime();
-    //                 }
-    //               })
-    //             }
-    //           })
-    //         } else {
-    //           console.log("Base Folder Exists");
-    //         }
-    //       });
-    //       SetCron(cookies[0].name); // to fetch utilisation
+          fs.access("C:/ITAMEssential", function(error) {
+            if (error) {
+              fs.mkdir("C:/ITAMEssential", function(err) {
+                if (err) {
+                  console.log(err)
+                } else {                  
+                   console.log("Created folder C:/ITAMEssential");
+                   fs.mkdir("C:/ITAMEssential/EventLogCSV", function(err) {
+                    if (err) {
+                      console.log(err)
+                    } else {
+                      console.log("Created folder C:/ITAMEssential/EventLogCSV");               
+                      checkforbatchfile_FirstTime();
+                    }
+                  })
+                }
+              })
+            } else {
+              console.log("Base Folder Exists");
+            }
+          });
+          SetCron(cookies[0].name); // to fetch utilisation
           
-    //       checkSecuritySelected(cookies[0].name); //to fetch security detail
+          checkSecuritySelected(cookies[0].name); //to fetch security detail
 
-    //     }).catch((error) => {
-    //       console.log(error)
-    //     })
+        }).catch((error) => {
+          console.log(error)
+        })
 
-    //     let autoLaunch = new AutoLaunch({
-    //       name: 'ePrompto',
-    //     });
-    //     autoLaunch.isEnabled().then((isEnabled) => {
-    //       if (!isEnabled) autoLaunch.enable();
-    //     });
+        let autoLaunch = new AutoLaunch({
+          name: 'ePrompto',
+        });
+        autoLaunch.isEnabled().then((isEnabled) => {
+          if (!isEnabled) autoLaunch.enable();
+        });
 
 
-    //   var now_datetime = new Date();
-    //   var options = { hour12: false, timeZone: "Asia/Kolkata" };
-    //   now_datetime = now_datetime.toLocaleString('en-US', options);
-    //   var only_date = now_datetime.split(", ");
+      var now_datetime = new Date();
+      var options = { hour12: false, timeZone: "Asia/Kolkata" };
+      now_datetime = now_datetime.toLocaleString('en-US', options);
+      var only_date = now_datetime.split(", ");
 
-    //     fs.writeFile(time_file, now_datetime, function (err) { 
-    //     if (err) return console.log(err);
-    //   });
+        fs.writeFile(time_file, now_datetime, function (err) { 
+        if (err) return console.log(err);
+      });
 
-    //   setGlobalVariable();  
+      setGlobalVariable();  
       
-      session.defaultSession.clearStorageData([], function (data) {
-          console.log(data);
-      })
+      // session.defaultSession.clearStorageData([], function (data) {
+      //     console.log(data);
+      // })
   }); 
 
 app.commandLine.appendSwitch('disable-http2');
